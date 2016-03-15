@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Webix", "Webix", "{5E745328-7660-4EA4-BF29-9CF3A5D59D27}"
+	ProjectSection(SolutionItems) = preProject
+		webix.html = webix.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{6A62883C-4A96-4D1E-A0E3-040C8A39CDEA}"
+	ProjectSection(SolutionItems) = preProject
+		webix.js = webix.js
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6A62883C-4A96-4D1E-A0E3-040C8A39CDEA} = {5E745328-7660-4EA4-BF29-9CF3A5D59D27}
+	EndGlobalSection
+EndGlobal
