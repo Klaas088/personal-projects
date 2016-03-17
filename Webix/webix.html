@@ -9,48 +9,111 @@
     <script src="webix.js" type="text/javascript"></script>
 </head>
 <body id="body">
-<script type="text/javascript">
-    //http://docs.webix.com/tutorials__basic_app_1.html
-    webix.ui({
-        width: 500,
-        id: "layout",
-        rows: [
-            {
-                view: "toolbar",
-                elements: [
-                    { view: "button", value: "Add", width: 100 },
-                    { view: "button", value: "Delete", width: 100 }
-                ]
-            },
-            {
-                cols: [
+    <script type="text/javascript">
+        //http://docs.webix.com/tutorials__basic_app_1.html
+
+        var filmlist = [
+            { id: 1, title: "The Shawshank Redemption", year: 1994 },
+            { id: 2, title: "The Godfather", year: 1972 },
+            { id: 3, title: "The Godfather: Part II", year: 1974 },
+            { id: 4, title: "The Good, the Bad and the Ugly", year: 1966 },
+            { id: 5, title: "My Fair Lady", year: 1964 },
+            { id: 6, title: "12 Angry Men", year: 1957 }
+        ];
+
+        webix.ui({
+            width: 500,
+            id: "layout",
+            rows: [
                 {
-                    height: 220, cols: [
+                    view: "toolbar",
+                    elements: [
+                        { view: "button", value: "Add", width: 100, click: "add_row" },
+                        { view: "button", value: "Delete", width: 100, click: "delete_row" },
+                        { view: "button", value: "Update", width: 100, click: "update_row" },
+                        { view: "button", value: "Clear", width: 100, click: "clearform" }
+                    ]
+                },
+                {
+                    cols: [
                         {
-                            view: "form", elements: [
-                                { view: "text", placeholder: "Title" },
-                                { view: "text", placeholder: "Year" }
-                            ]
-                        }, {
-                            view: "list",
-                            template: "#title# - #year#",
-                            select: true,
-                            height: 400,
-                            data: [
-                                { id: 1, title: "The Shawshank Redemption", year: 1994 },
-                                { id: 2, title: "The Godfather", year: 1972 },
-                                { id: 3, title: "The Godfather: Part II", year: 1974 },
-                                { id: 4, title: "The Good, the Bad and the Ugly", year: 1966 },
-                                { id: 5, title: "My Fair Lady", year: 1964 },
-                                { id: 6, title: "12 Angry Men", year: 1957 }
+                            height: 220,
+                            cols: [
+                                {
+                                    view: "form",
+                                    id: "myform",
+                                    elements: [
+                                        { view: "text", name: "title", placeholder: "Title" },
+                                        { view: "text", name: "year", placeholder: "Year" }
+                                    ]
+                                }, {
+                                    view: "list",
+                                    id: "mylist",
+                                    template: "#title# - #year#",
+                                    select: true,
+                                    height: 400,
+                                    data: filmlist
+                                }
                             ]
                         }
                     ]
-                }]
-            }
-        ]
+                }
+            ]
 
-    })
-</script>
+        });
+
+        //Fires after item was selected
+        $$("mylist").attachEvent("onAfterSelect", (id) => {
+            var selectedItem = $$("mylist").getSelectedItem();
+            $$("myform").setValues({
+                title: selectedItem.title,
+                year: selectedItem.year
+            });
+
+        });
+
+        function add_row() {
+            //clear the form
+            $$("myform").clear();
+            //Set the focus on the title element
+            //$$("myform").focus("title");
+            $$("myform").focus();
+            //add items to the list
+            $$("mylist").add({
+                title: $$("myform").getValues().title,
+                year: $$("myform").getValues().year
+            });
+        }
+
+        function delete_row() {
+            var id = $$("mylist").getSelectedId();
+            $$("mylist").remove(id);
+        }
+
+        function update_row() {
+            var selectedid = $$("mylist").getSelectedId();
+
+            //Get the new items
+            var values = $$("myform").getValues();
+            var title = values.title;
+            var year = values.year;
+
+            //Replace the old one's with the new ones
+            var item = $$("mylist").getItem(selectedid);
+            item.title = title;
+            item.year = year;
+            $$("mylist").updateItem(selectedid, item);
+
+
+        }
+
+        function clearAndSetFocusOnForm() {
+            
+        }
+
+        function clearform() {
+            $$("mylist").clearAll();
+        }
+    </script>
 </body>
 </html>
