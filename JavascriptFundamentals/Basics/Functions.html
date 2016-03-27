@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Functions</h1>
+    <script type="text/javascript">
+        console.log("1. Optionele parameters");
+        //Optionele parameterss
+        function calcPrice(quantity, price, currency) {
+            //De currency is 'undefined' en het geeft geen error.
+            //Daardoor kan je optionele parameters gebruiken
+            console.log(currency);
+        }
+        calcPrice(2, 2);
+
+        console.log("2. Function expressions");
+        //Function expressions zijn eigenlijk functies die gedeclareerd worden in een variable*/
+        var activeOrder = function () {
+            console.log("Order activated");
+        }
+        activeOrder();
+        activeOrder
+        //activateOrder is a function type
+        console.log(typeof activeOrder);
+
+        var x = function (a, b) { return a * b };
+        var z = x(2, 4);
+        console.log(z);
+
+    </script>
+</body>
+</html>

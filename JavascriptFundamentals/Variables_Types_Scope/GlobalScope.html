@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Global Scope</h1>
+    <p>De global scope houdt alle variablen bij die niet in een functie zitten? Er is maar 1.</p>
+    <script>
+        //De window object is het globale object
+        var productId = 'PRD-200';
+        console.log(productId);
+        console.log(window.productId);
+
+        //Als this niet gebruikt wordt binnen een functie dan is het, het window object.
+        console.log(this === window);
+
+        var description = 'hardware product';
+        function updateProduct() {
+            //Als een variable niet is declareerd binnen een functie gaat javascript zoeken in de global scope.
+            //Vind hij ze niet dan gaat hij deze gaan aanmaken binnen de 'global' scope.
+            description = 'updated product';
+        }
+        updateProduct();
+        console.log(description);
+
+
+    </script>
+</body>
+</html>

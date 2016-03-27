@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Function Scope</h1>
+    <p>Als je een functie aanmaakt dan krijgt het zijn eigen scope.</p>
+<script>
+    var description = 'hardware product';
+    function updateProduct() {
+        //Deze zal niet gebruikt worden aangezien het in de functie wordt gedclareerd.
+        var description = 'updated product';
+    }
+    updateProduct();
+    console.log(description);
+
+
+    var productText = 'original product';
+    function updateProduct2() {
+        var productText = 'updated product';
+        var updateProductId = function () {
+            //Als deze functie wordt uitgevoerd, dan vind hij 'productText' niet en gaat hij kijken bij zijn parent scope.
+            //De globale variable doet er niet toe aangezien hij hem al zal vinden in zijn parent scope, ipv in de global scope.
+            console.log(productText);
+        }
+        updateProductId();
+    }
+    updateProduct2();
+
+</script>
+</body>
+</html>

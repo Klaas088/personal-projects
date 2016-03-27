@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Prototypes</h1>
+    <p>
+        Ieder javascript object heeft een prototype property, dit wordt intern in javascript beheert. <br />
+        Daarom hebben we er niet altijd toegang toe.<br />
+        De prototype property is een object.
+
+    </p>
+    <h2>Hoe localiseert javascript zijn functies</h2>
+    <p>
+        Stel je hebt het volgende:<br />
+        var project = new Object();<br />
+        project.someFunction();<br /><br />
+        Dan gaat javascript je functie als volgt opzoeken:<br />
+        <ol>
+            <li>project.someFunction()</li>
+            <li>Hij kijkt in het prototype object van project<br />project.prototype.someFunction()</li>
+            <li>Hij kijkt in het prototype object van prototype<br />project.prototype.prototype.someFuncton()</li>
+            <li>project.prototype.prototype.prototype.someFunction()</li>
+            <li>etc.</li>
+        </ol>
+        Hij kijkt tot de prototype 'undefined' is.
+
+    </p>
+    <script>
+        console.log("1. Prototypes: default");
+        var project = {
+            name: 'Project Phoenix'
+        };
+        //toString werd niet door mij gedefineerd. Dit is een prototype.
+        console.log(project.toString());
+        //We hebben geen toegang tot het prototype object tenzij het een contructor functie is
+        console.log(typeof project.prototype);
+        //Dit is niet ondersteund in ouder IE (IE10 en ouder), geen productie code
+        console.log(typeof project.__proto__);
+        //Als je een Json object creert is het prototype automatisch het prototype van object
+        console.log(project.__proto__ === Object.prototype);
+
+        console.log("2. Prototypes: eigen objecten");
+        //Wat als we het prototype willen zetten naar een eigen object, we willen controle om dit prototyp field te setten.
+        //Dit gebeurt via Object.create()
+        var project2 = {
+            securityLevel: 2
+        };
+        //Onderstaand creert een nieuw object, maar het eerste argument is het prototype dat wordt meegegeven.
+        //Dus het prototype van secretProject is het project2 object die op zijn beurt de default prototype heeft (Object.prototype).
+        //daardoor zal een toString functie werken. Je kruipt als het ware tussen secretProject --> Project2 --> Object.prototype
+        var secretProject = Object.create(project2);
+        console.log(secretProject.securityLevel);
+        console.log(typeof secretProject.toString);
+        console.log(secretProject.__proto__ === Object.prototype);
+        console.log(secretProject.__proto__.__proto__ === Object.prototype);
+
+        console.log("2. Prototypes: miscellaneous object functions (diverse object functies)");
+
+        var project3 = {
+            name: 'Top secret',
+            dueDate: '01/01/2016'
+        };
+        //hasownproperty kijkt of een object een property heeft, maar kijkt niet in zijn prototype.
+        console.log(project3.hasOwnProperty('name'));
+        console.log(project3.hasOwnProperty('toString'));
+        console.log(project3.__proto__.hasOwnProperty('toString'));
+
+        //Controleer of een object een prototype is van een object. 
+        console.log(project2.isPrototypeOf(secretProject));
+        //Hij doorloopt de prototype chain om te kijken of het een prototype is.
+        console.log(Object.prototype.isPrototypeOf(secretProject));
+
+        //Een algemene functie toevoegen aan een basis type
+        String.prototype.addTextTrack = function() {
+            return this.toString()+" track";
+        }
+
+        var testString = "TestString";
+        console.log(testString.addTextTrack());
+
+        Number.prototype.add = function(counter) {
+            return this.valueOf() + counter;
+        }
+
+        var testNumber = 9;
+        console.log(testNumber.add(10));
+    </script>
+</body>
+</html>

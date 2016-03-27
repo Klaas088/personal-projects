@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>If...Else</h1>
+    <script type="text/javascript">
+        var orderTotal = 99.99;
+        var discount;
+        //Het unique hieraan is dat alle cases nu expressions worden die kunnen geevalueert worden.
+        //In c# kan dit niet.
+        switch(true) {
+            case orderTotal >= 50 && orderTotal < 75:
+                discount = 10;
+                break;
+            case orderTotal >= 75 && orderTotal < 100:
+                discount = 20;
+                break;
+            case orderTotal >= 100:
+                discount = 20;
+                break;
+            default:
+                discount = 0;
+
+        }
+        console.log(discount);
+    </script>
+</body>
+</html>

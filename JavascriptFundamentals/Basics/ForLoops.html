@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>For Loops</h1>
+<script type="text/javascript">
+
+    var lineItem = {
+        product: "Widget 1",
+        quantity: 4,
+        price: 9.5
+    };
+
+    for (var field in lineItem) {
+        //Dit gaat het veld weergeven
+        console.log(field);
+        //Dit geeft de waarde mee
+        console.log(lineItem[field]);
+    }
+
+</script>
+</body>
+</html>

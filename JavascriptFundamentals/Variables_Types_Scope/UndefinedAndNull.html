@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Undefinded and null</h1>
+<script>
+    //Null is een special keyword in javascript, het is een leeg object.
+    var productId = null;
+    console.log(typeof productId);
+    console.log(typeof null);
+
+    //Undefinded is een value die kan gebruikt worden, maar is ook een data type.
+    var productId1 = undefined;
+    console.log(typeof productId1);
+
+    //Als je twee '==' gebruikt probeert javascript eerst nog beide types te converten naar het zelfde en dan gaan vergelijken.
+    console.log(undefined == null);
+    console.log(1 == "1");
+    //Bij drie '===' wordt gekeken naar het type en de value (strict).
+    console.log(undefined === null);
+    console.log(1 === "1");
+</script>
+</body>
+</html>

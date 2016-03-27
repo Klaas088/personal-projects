@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Objects & JSON objects</h1>
+    <script>
+        console.log("1. Simple object");
+        //new Object is de default constructor om een een leeg object aan te maken.
+        var project = new Object();
+        project.name = "Project phoenix";
+        project.securitylevel = 15;
+        project.updateDueDate = function () {
+            return true;
+        };
+        //dot notation
+        console.log(project.updateDueDate());
+        //Bracket notation
+        console.log(project['securitylevel']);
+        //Dynamic notation
+        var field = 'securitylevel';
+        console.log(project[field]);
+
+        //Gebruik Json om een object aan te maken.
+        console.log("2. Json notation");
+        //Een leeg object
+        var project1 = {};
+        project1.name = 'Project Phoenix 1';
+        console.log(project1.name);
+        //Creër een object met properties in JSON.
+        var project3 = {
+            name: 'Project phoenix 3',
+            secuirtyLevel: 15,
+            updateDueDate: function () {
+                return true;
+            },
+            //array's
+            team: ['Test1', 'Test2', 'Test3'],
+            //array van objecten
+            tasks: [
+            {
+                taskName: 'first'
+            },
+            {
+                taskName: 'last'
+            }]
+        };
+        console.log(project3.name);
+        console.log(project3.team[2]);
+        console.log(project3.tasks[0].taskName);
+
+        console.log("3. Object.defineProperty");
+        //Define property wordt gebruikt als je meer controle over je properties wenst.
+
+        //Getter & seeter functie op een object:
+        //_dueDate wordt gezet in het object en de defineProperty dueDate geeft deze terug.
+        var taskDate = {
+            _dueDate: '27/03/2016'
+        };
+        Object.defineProperty(taskDate, 'dueDate', {
+            get: function () {
+                return this._dueDate + " getter!";
+            },
+            set: function (value) {
+                this._dueDate = value + " setter!";
+            }
+        });
+        //Getter
+        console.log(taskDate._dueDate);
+        console.log(taskDate.dueDate);
+        //Setter
+        taskDate.dueDate = '27/03/2016';
+        console.log(taskDate.dueDate);
+        console.log('------------------------------');
+
+
+        var task = {};
+        Object.defineProperty(task, 'proptext', {
+            value: 'ProptextValue',
+            writable: true
+        });
+        task.proptext = task.proptext + ' new';
+        console.log(task.proptext);
+        console.log('------------------------------');
+        //Proptext1 is een readonly property, dit is de default
+        Object.defineProperty(task, 'proptext1', {
+            value: 'Proptext1Value'
+        });
+
+        task.proptext1 = task.proptext1 + ' new';
+        console.log(task.proptext1);
+        console.log('------------------------------');
+        //Enumarble wordt gebruikt in for in statements, om elke property te overlopen.
+        //Zet je deze false dan wordt deze niet overlopen (default)
+        Object.defineProperty(task, 'proptextenum', {
+            value: 'ProptextEnumValue',
+            enumerable: true
+        });
+
+        for (var f in task) {
+            console.log(f);
+        }
+        console.log('------------------------------');
+        //Configurable op false kan je de property niet meer aanpassen, default is true.
+        //Geeft error in console
+        Object.defineProperty(task, 'proptextconfig', {
+            value: 'ProptextEnumConfig',
+            configurable: true
+        });
+        Object.defineProperty(task, 'proptextconfig', {
+            value: 'ProptextEnumConfig change'
+        });
+        console.log(task.proptextconfig);
+        console.log('------------------------------');
+
+        console.log("4. Object.defineProperties");
+        //Om meerdere properties in 1 keer te gaan setten op een object: defineProperties.
+        var taskM = {
+            _text: String
+        };
+        Object.defineProperties(taskM, {
+            'text': {
+                get: function () {
+                    return this._text;
+                },
+                set: function (value) {
+                    this._text = value;
+                }
+            },
+            'date': {
+                value: '27/03/2016'
+            }
+        });
+        taskM.text = "Testing";
+        console.log(taskM.text);
+        console.log(taskM.text + 'D::' + taskM.date);
+        var descriptor = Object.getOwnPropertyDescriptor(taskM, 'text');
+        console.log(descriptor);
+    </script>
+
+</body>
+</html>
