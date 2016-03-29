@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Calling Functions (call() && apply())</h1>
+    <p>
+        Als je wil controle krijgen over het 'this' object in de functie, kan je dit gebruiken.<br />
+        Dit wordt veel gebruikt in de code van jQuery en Angular.
+    </p>
+    <script>
+        var updateZipCode = function () {
+            console.log(this);
+        };
+        //Standaard manier
+        updateZipCode();
+        //Hier roepen we de call methode aan en geven we een leeg object mee
+        //Je ziet dat het lege object wordt toegekend aan het this object.
+        updateZipCode.call({});
+        updateZipCode.call({ zip: 115 });
+
+        //Een functie met parameters
+        var updateZipCodePara = function (newZipcode, country) {
+            console.log(newZipcode + ' ' + country);
+            console.log(this);
+        }
+        var zipCode = {
+            zip: '123456'
+        }
+        //.call --> eerste argument is het this object (valueForThis), de rest zijn de eventuele paremeters die moeten worden doorgeven aan de functie.
+        updateZipCodePara.call(zipCode, '8490', 'BE');
+        //.apply --> eerste argument is het this object (valueForThis), de volgende is een array van parameters
+        updateZipCodePara.apply(zipCode, ['8490', 'BE']);
+    </script>
+</body>
+</html>

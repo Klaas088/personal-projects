@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>The "this" keyword</h1>
+    <script>
+        //This is een object
+        console.log(typeof this);
+        //this is hier een window object (in de globale namespace)
+        console.log(this === window);
+
+        var employee = {
+            name: "Jeff",
+            updateSalary: function () {
+                //Als we een in context van een object werken dan is 'this' het object dat de functie aanroept.
+                console.log(this);
+            },
+            updateSalary2:function() {
+                var fn = function() {
+                    console.log("fn");
+                    //'This' is hier het window object, dit omdat er geen object aan de functie is toegekend.
+                    //Ook al zit hij een object hij kent deze niet.
+                    console.log(this);
+                }
+                fn();
+            }
+        }
+        employee.updateSalary();
+        employee.updateSalary2();
+
+        var Address = function(line1) {
+            this.line1 = line1;
+            console.log(this);
+        }
+        //Als je dit aanroept als een gewoone functie dan is 'this' window.
+        Address("straat");
+        //Als je er een 'new' object van maakt, dan wordt het nieuwe object toegekend aan het nieuwe object.
+        //'New' creert een nieuw obejct en door een constructor functie te gebruiken wordt dit nieuwe object geassignd aan 'this'
+        var addr = new Address("nieuwe straat");
+
+
+
+    </script>
+</body>
+</html>

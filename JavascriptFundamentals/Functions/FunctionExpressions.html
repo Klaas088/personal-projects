@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Function expressions</h1>
+    <p>
+        Het verschil met een functie statement is dat de naam soms kan wegvallen om anonymous functies te creeren.<br />
+        Een functie expressie kan worden gebruikt als een IIFE (Immediately Invoked Function Expression).
+    </p>
+    <h1>Naming Function expressions</h1>
+<script>
+    //Hieronder geeft de debugger weer dat er een fout zit in een anonymous function
+    //var func = function(test) {
+    //    throw "exception";
+    //}
+    //func("test");
+
+    //Hieronder geeft de debugger weer dat er een fout zit in de fnNaam functie, dit is handiger om te gaan debuggen
+    var func1 = function fnNaam(test) {
+        throw "exception";
+    }
+    func1("test");
+
+</script>
+</body>
+</html>

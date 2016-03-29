@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Constructor</h1>
+    <script>
+        //Een object is eigenlijk ook een functie
+        console.log(typeof Object);
+        //Een constructor functie is eigenlijk paremeter gaan toekennen aan de this object.
+        //this is het huidige object en kan gezien worden als een object dat wordt doorgegeven achter de schermen.
+        var Employee = function (name, boss) {
+            //console.log(typeof this);
+            this.name = name;
+            this.boss = boss;
+        }
+        var newEmployee = new Employee("Klaas", "Stijn");
+        console.log(typeof newEmployee);
+        console.log(newEmployee);
+        console.log(newEmployee.name);
+
+        var Employee1 = function (name) {
+            this.name = name;
+            this.salary = 5000;
+            this.giveRaise = function () {
+
+            };
+        }
+        //Bij constructor functies is het zo dat je toegang hebt tot de prototype van het object.
+        //Dit is een LEEG object prototype object
+        //Bij JSON object is het prototype een object.prototype en daar heb je geen toegang toe.
+        Employee1.prototype.giveRaiseProto = function (raise) {
+            //Het this object is het object waarvan het wordt aangeroepen (dus niet het prototype maar de volledige object)
+             this.salary += raise;
+        };
+        var e = new Employee1("JJ");
+        var e1 = new Employee1("JV");
+        //Zijn verschillende objecten
+        console.log(e === e1);
+        //Maar ze hebben wel dezelfde prototypes
+        console.log(e.__proto__ === e1.__proto__);
+        //Functies zijn ook niet hetzelfde van een functie
+        console.log(e.giveRaise === e1.giveRaise);
+        //Maar functies aan de prototype zijn wel gelijk.
+        console.log(e.giveRaiseProto === e1.giveRaiseProto);
+
+
+
+    </script>
+</body>
+</html>
