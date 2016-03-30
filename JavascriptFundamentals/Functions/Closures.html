@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Closures</h1>
+    <p>
+        Dit bevat de functie en al de variablen in de parent functies.<br />
+        Ze treden op in runtime<br/>
+        De functie blijft bestaan en heeft toegang tot de volledige context.<br/>
+        We gebruiken closures om een 'kleine' functie van een 'grote' functie te gaan returnen.
+    </p>
+    <script>
+        var salaryUpdater = function (salary) {
+            var currentSalary = salary;
+            var generator = function () {
+                currentSalary *= 3;
+                return currentSalary;
+            }
+            return generator;
+        }
+
+        var updateFn = salaryUpdater(500);
+        console.log(updateFn());
+
+        var salaryUpdater2 = function(salary) {
+            var currentSalary = salary;
+            var generator = function() {
+                currentSalary += 100;
+                return currentSalary;
+            }
+            return generator;
+        }
+
+        var updateFn2 = salaryUpdater2(500);
+        //Als je de functie 2 maal aanroept zie je dat de 'currentSalary' blijft bestaan (persistent).
+        //Dit is een goed voorbeeld van 'closures', de variabelen van de functie erboven blijven bestaan
+        updateFn2();
+        console.log(updateFn2());
+
+
+    </script>
+</body>
+</html>

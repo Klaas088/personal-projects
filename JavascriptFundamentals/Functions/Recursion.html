@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Recursion (recursie)</h1>
+    <script>
+        var orgChart = {
+            name: "Michael",
+            subordinates: [
+                {
+                    name: "Andy",
+                    subordinates: [
+                        {
+                            name: "Dwight",
+                            subordinates: []
+                        }, {
+                            name: "Kevin",
+                            subordinates: []
+                        }
+                    ]
+                }
+            ]
+        };
+
+        //Hieronder zie je dat het aangewezen is om een functie expression altijd een naam te geven bij recursie
+        var fn = function showAllEmployees(topemployee) {
+            console.log(topemployee.name);
+            for (let i = 0; i < topemployee.subordinates.length; i++) {
+                //Onderstaande geeft een fout, aangezien de fn in de code onder de functie wordt herinitialiseerd naar null.
+                //Deze functie zal maar 1 maal werken aangezien je de fn2 aanroept
+                //fn(topemployee.subordinates[i]);
+
+                //Deze functie werkt wel aangezien je de naam van de functie gebruikt.
+                showAllEmployees(topemployee.subordinates[i]);
+            }
+        }
+        var fn2 = fn;
+        fn = null;
+        fn2(orgChart);
+        //Dit werkt niet
+        //showAllEmployees(orgChart);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>IIFEs (Immediatly Invoked Function Expressions)</h1>
+    <p>
+        Een IIFE is een functie die metteen wordt uitgevoerd.<br />
+        Met als hoofdreden om de globale namespace niet te vervuilen, maw dat alles binnen de scope van de IIFE blijft.
+    </p>
+    <script>
+        (function () {
+            console.log('Executed');
+        })();
+
+        (function () {
+            var employee = 'test';
+        })();
+        //Onderstaande geeft een error aangezien employee niet in de function scope zit en niet in de global scope
+        //console.log(employee);
+
+        //Nu is het vaak zo dat verschillende library's maar 1 globale variable hebben.
+        //Bijvoorbeeld in Jqeury (jquery variable), Angelar (the angelar variable) of app of de naam van de applicatie.
+        var app = {};
+        (function (ns) {
+            ns.name = 'none';
+        })(app);
+
+        console.log(app.name);
+
+        var app = {};
+        var Jqeury = {};
+        (function (ns, $) {
+            ns.name = 'none';
+            console.log($ === Jqeury);
+        })(app, Jqeury);
+    </script>
+</body>
+</html>
