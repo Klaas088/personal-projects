@@ -1,0 +1,13 @@
+{
+  "name": "TypScriptInDepth",
+  "version": "1.0.0",
+  "description": "Personal project to learn typescript",
+  "scripts": { },
+  "author": "Klaas Ranson",
+  "license": "Commercial",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-typescript": "*",
+    "typescript": "*"
+  }
+}

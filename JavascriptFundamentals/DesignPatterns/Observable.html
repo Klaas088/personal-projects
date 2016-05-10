@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Observable</h1>
+    <p>
+        We gebruiken methodes om values te gaan updaten en te verkrijgen.<br />
+        Methods as properties principe.<br />
+        Dit wordt gebruikt in knockout.
+    </p>
+    <script>
+        var Book = function (name, price) {
+            var priceChanging = [];
+            var priceChanged = [];
+            this.name = function (val) {
+                //Return de 'name', die via een closure bereikbaar is
+                return name;
+            };
+            //Beter is de defineProperty die in Ecmascript5 zit (zie objecten)
+            this.price = function (val) {
+                //Controleer of de val verschiled van undefined en als de val een verschillende waarde heeft als de huidige prijs
+                if (val !== undefined && val !== price) {
+                    //We overlopen alle methodes die moeten aangeroepen worden als de price wijziged
+                    for (var i = 0; i < priceChanging.length; i++) {
+                        var result = priceChanging[i](this, val);
+                        if (result === false) {
+                            return price;
+                        }
+                    }
+                    //Set de nieuwe prijs
+                    price = val;
+                    //Overloop alle methodes die moeten uitgevoerd worden als de price is aangepast
+                    for (var i = 0; i < priceChanged.length; i++) {
+                        priceChanged[i](this);
+                    }
+                }
+
+                //Return de 'price', die via een closure bereikbaar is. Dit is vooral bedoeld bij een getter.
+                return price;
+            }
+            this.onPriceChanging = function (callback) {
+                priceChanging.push(callback);
+            }
+            this.onPriceChanged = function (callback) {
+                priceChanged.push(callback);
+            }
+        }
+
+        var book = new Book("Javascript: The good parts", 23.99);
+        console.log("The name is: " + book.name());
+        console.log("The price is: " + book.price());
+
+        book.onPriceChanging(function (book, price) {
+            if (price > 100) {
+                console.log('Te hoog');
+                return false;
+            }
+            return true;
+        });
+
+        book.onPriceChanged(function (book) {
+            console.log('The book price has changed to: ' + book.price());
+        });
+
+        book.price(50);
+
+    </script>
+</body>
+</html>

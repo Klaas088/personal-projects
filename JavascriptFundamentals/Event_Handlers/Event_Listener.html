@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Event listeners</h1>
+    <input id="submit1" type="button" value="test" />
+    <input id="submit2" type="button" value="test2" />
+    <script>
+        var button = document.getElementById("submit1");
+        button.addEventListener('click', function () {
+            console.log("Button Clicked");
+        });
+        //Voordeel van event handlers is dat je er meerdere aan 1 DOM element kan hangen
+        button.addEventListener('click', function () {
+            console.log("Button Clicked 1");
+        });
+
+        var button2 = document.getElementById("submit2")
+        var fn1 = function () {
+            console.log("Button Clicked (fn1)");
+        }
+
+        var fn2 = function () {
+            console.log("Button Clicked (fn2)");
+        }
+
+        button2.addEventListener("click", fn1);
+        button2.addEventListener("click", fn2);
+        //Remove een eventlistener
+        button2.removeEventListener("click",fn2);
+
+    </script>
+
+</body>
+</html>

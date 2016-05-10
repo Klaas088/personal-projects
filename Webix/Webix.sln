@@ -5,6 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Webix", "Webix", "{5E745328-7660-4EA4-BF29-9CF3A5D59D27}"
 	ProjectSection(SolutionItems) = preProject
+		AddDynamiclyItems.html = AddDynamiclyItems.html
 		webix.html = webix.html
 	EndProjectSection
 EndProject

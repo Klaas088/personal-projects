@@ -22,7 +22,6 @@
         ];
 
         webix.ui({
-            width: 500,
             id: "layout",
             rows: [
                 {
@@ -37,14 +36,14 @@
                 {
                     cols: [
                         {
-                            height: 220,
                             cols: [
                                 {
                                     view: "form",
                                     id: "myform",
                                     elements: [
                                         { view: "text", name: "title", placeholder: "Title" },
-                                        { view: "text", name: "year", placeholder: "Year" }
+                                        { view: "text", name: "year", placeholder: "Year" },
+                                        
                                     ]
                                 }, {
                                     view: "list",
@@ -57,7 +56,15 @@
                             ]
                         }
                     ]
+                },
+                {
+                    view: "radio", label: "Branch", value: 1, options: [
+                    { id: 3, view: "text", name: "title", placeholder: "Title" },
+                    { id: 1, value: "Master" }, //the initially selected item
+                    { id: 2, value: "Branch" }
+                    ]
                 }
+
             ]
 
         });
@@ -108,12 +115,15 @@
         }
 
         function clearAndSetFocusOnForm() {
-            
+
         }
 
         function clearform() {
             $$("mylist").clearAll();
         }
+        /*****/
+
+
     </script>
 </body>
 </html>

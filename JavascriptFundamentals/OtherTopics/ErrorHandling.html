@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Error Handling</h1>
+    <script>
+        try {
+            throw new RangeError("Custom Error");
+        } catch (e) {
+            //De 'e' argument verwijst naar het error object.
+            console.log(e);
+            console.log(e.name + " - " + e.message);
+            //Om te weten van welke type je error is gebruik je instanceOf
+            if (e instanceof RangeError) {
+                console.log("RangeError:" + e.name);
+            }
+        } finally {
+            console.log("Finally done.");
+        }
+
+    </script>
+</body>
+</html>

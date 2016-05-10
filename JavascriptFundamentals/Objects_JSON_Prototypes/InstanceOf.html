@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>InstanceOf</h1>
+    <script>
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof
+        //De 'instanceOf' operator tests als er een constructor.prototype in de object prototype chain.
+        function C() { }
+        function D() { }
+        var o = new C();
+
+
+        //Dit is true, omdat de prototypes constructors hetzelfde zijn
+        console.log(o instanceof C);
+        console.log(Object.getPrototypeOf(o).constructor);
+        console.log(C.prototype.constructor);
+        console.log(D.prototype.constructor);
+        console.log(o instanceof D);
+
+        function Car(make, model, year) {
+            this.make = make;
+            this.model = model;
+            this.year = year;
+        }
+        var mycar = new Car("Honda", "Accord", 1998);
+        console.log("MycarTest");
+        console.log(mycar instanceof Car);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Arguments</h1>
+    <script>
+        var validateValues = function () {
+            console.log(arguments.length);
+            console.log(arguments[0]);
+            //setting an argument
+            arguments[3] = 'test';
+            console.log(arguments[3]);
+        }
+
+        validateValues(1, true, 'Settings');
+
+
+        function myFunc(a, b, c) {
+            return a + b + c;
+           
+        }
+
+        function myFunc1() {
+            var x = 0;
+            for (var i = 0; i < arguments.length; i++) {
+                x = x + arguments[i];
+            }
+            return x;
+        }
+
+        console.log(myFunc(1, 2, 3));
+        //Het resultaat is ook 6, hij doet niets met het laatste argument
+        console.log(myFunc(1, 2, 3, 4));
+        //Het resultaat is NaN omdat 'c' geen nummer is, maar 'undefinded'
+        console.log(myFunc(1, 2));
+
+        //Hier kan je oneindig veel argumenten meegeven, want deze worden allemaal opgeteld
+        console.log(myFunc1(1, 2, 3));
+        console.log(myFunc1(1, 2, 3, 4));
+        console.log(myFunc1(1, 2));
+    </script>
+</body>
+</html>

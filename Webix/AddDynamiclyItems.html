@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.webix.com/edge/webix.css" type="text/css">
+    <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+</head>
+<body>
+<script>
+    var counter = 0;
+    webix.ui({
+        view: "form", scroll: false,
+        width: 600,
+
+        cols: [
+            {
+                rows: [
+                  {
+                      view: "button", value: "add many at once", click: function () {
+                          webix.ui([
+                              { view: "text", value: "Extra 1", label: "Ex 1", name: "ex1" },
+                              { view: "text", value: "Extra 2", label: "Ex 2", name: "ex2" },
+                              { view: "text", value: "Extra 3", label: "Ex 3", name: "ex3" }
+                          ], this.getParentView());
+                      }
+                  },
+                ]
+            },
+            {
+                rows: [
+                  {
+                      view: "button", value: "add one more input", click: function () {
+                          counter++;
+                          this.getParentView().addView({
+                              view: "text", value: "Value " + counter, label: "Text " + counter, name: "text" + counter
+                          });
+                      }
+                  },
+                  {
+                      view: "button", value: "get values", click: function () {
+                          webix.message(JSON.stringify(this.getFormView().getValues()));
+                      }
+                  },
+                  {
+                      view: "button", value: "remove last input", click: function () {
+                          var form = this.getParentView();
+                          var list = form.getChildViews();
+                          form.removeView(list[list.length - 1].config.id);
+                      }
+                  }
+                ]
+            }
+        ]
+    });
+</script>
+</body>
+</html>

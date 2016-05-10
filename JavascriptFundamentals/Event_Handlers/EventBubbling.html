@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        p {
+            height: 30px;
+            width: 150px;
+            background-color: #ccf;
+        }
+
+        div {
+            height: 30px;
+            width: 150px;
+            background-color: #cfc;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.3.js" integrity="sha256-1XMpEtA4eKXNNpXcJ1pmMPs8JV+nwLdEqwiJeCQEkyc=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <h1>Event bubbling</h1>
+    <div id="div1_parent" style="width: 200px; height: 200px; background-color: blue">
+        <div id="div2_child" style="width: 100px; height: 100px; background-color: red"></div>
+    </div>
+
+    <p>paragraph</p>
+    <div>division</div>
+    <script>
+        var div1 = document.getElementById("div1_parent");
+        var div2 = document.getElementById("div2_child");
+        var clickHandler = function divClickHandler(event) {
+            //Het keyword 'this' is in de context van events altijd het dom element.
+            console.log(this.id);
+            //stop propagation zorgt ervoor dat het event niet wordt doorgegeven aan de parent element 'stops bubbling up'.
+            //Daardoor wordt dit slechts 1 maal uitgevoerd.
+            //https://api.jquery.com/event.stoppropagation/
+
+            event.stopPropagation();
+
+            //De stop immediate propagation dient om alle andere event handlers te doen stoppen. 
+            //Het voert gewoon de eerste handler uit en daarna niets meer, terwijl 'stopPropagation' enkel de bubbling tegen houdt.
+            //event.stopImmediatePropagation();
+
+            //Zorgt ervoor dat de default actie wordt tegengehouden. Bijvoorbeeld de click methode bij een link, daar wordt altijd naar de url gesurft, maar met preventDefault gebeurt dit niet.
+            event.preventDefault();
+        }
+
+        //Het aanpassen van het derde attribuut zorgt ervoor dat eerst de parent wordt aangesproken en daarna de children
+        div1.addEventListener("click", clickHandler, false);
+        div2.addEventListener("click", clickHandler, false);
+        div2.addEventListener("click", function() {
+            console.log("Tweede click handler");
+        }, false);
+
+        $("p").click(function (event) {
+            //event.stopImmediatePropagation();
+            event.stopPropagation();
+        });
+        $("p").click(function (event) {
+            // This function won't be executed
+            $(this).css("background-color", "#f00");
+        });
+        //$("div").click(function (event) {
+        //    // This function will be executed
+        //    $(this).css("background-color", "#f00");
+        //});
+    </script>
+</body>
+</html>

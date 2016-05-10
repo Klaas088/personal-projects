@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Chaining design pattern</h1>
+    <p>
+        Chainging is een design pattern die het mogelijk maakt om van hetzelfde object verschillende methodes na elkaar (opeenvolgend) aan te roepen.
+        <br />
+        Dit is een veel gebruikte techniek in jQeury.
+        <br />
+        Het is hetzelfde principe als de fleunt api in .Net
+    </p>
+    <a href="http://schier.co/blog/2013/11/14/method-chaining-in-javascript.html">http://schier.co/blog/2013/11/14/method-chaining-in-javascript.html</a>
+    <script>
+        //Een van de eigenschappen van chaining is dat je bij de functies het huidig object terug geeft (meestal return this).
+        var Calc = function (start) {
+            //Via het closure principe kan je steeds de start variable gaan gebruiken in je functies.
+            this.add = function (x) {
+                start = start + x;
+                return this;
+            }
+            this.multiple = function (x) {
+                start = start * x;
+                return this;
+            }
+            this.equals = function (callback) {
+                callback(start);
+                return this;
+            }
+        }
+
+
+
+        //Een object die gebruikt maakt van chaining
+        new Calc(0)
+            .add(1)
+            .add(2)
+            .multiple(3)
+            .equals(function (result) {
+                console.log(result);
+            });
+
+        var Kitten = function () {
+            this.name = "Garfield";
+            this.color = "brown";
+            this.gender = "male";
+
+            this.setName = function (name) {
+                this.name = name;
+            }
+
+            this.setColor = function (color) {
+                this.color = color;
+            }
+        }
+
+        //Kitten.prototype.setName = function(name) {
+        //    this.name = name;
+        //}
+
+        var bob = new Kitten();
+        //Dit zal niet werken aangezien de setName geen value terug geeft, dan zal de setColor een fout geven omdat hij geen object heeft om tegen te werken ('undefined').
+        bob.setName("Klaas").setColor("black");
+        console.log(bob.name);
+
+        //function chainify(object) {
+        //    var objectKeys = Object.keys(object);
+        //    objectKeys.forEach(function (key) {
+        //        var member = object[key];
+        //        var memberTypeOf = typeof member;
+        //        //Controleren of de member een functie is.
+        //        //Controleren of de functie al niet een return value heeft
+        //        if (memberTypeOf === "function" && /\breturn\b/.test(member) == false) {
+        //            //Vervangen van het huidige object door een nieuwe object die wel this returnt
+        //            member.apply(this, arguments);
+        //            return this;
+        //        }
+        //    });
+        //}
+    </script>
+</body>
+</html>
