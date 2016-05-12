@@ -1,0 +1,11 @@
+﻿{
+  //"files": [
+  //  "typescript/interfaces/interfaces.ts",
+  //  "typescript/interfaces/enum.ts",
+  //  "typescript/interfaces/workCode.ts"
+  //],
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "target": "es5"
+  }
+}
