@@ -51,6 +51,12 @@ gulp.task("build-bundle-modules", ["build-modules"], function () {
         .pipe(gulp.dest("build"));
 });
 
+gulp.task('build-application', function () {
+    return gulp.src("typescript/application/*.ts").pipe(ts({
+        out: 'application.js'
+    })).pipe(gulp.dest('build'));;
+});
+
 //gulp.task('watch', function () {
 //    gulp.watch("typescript/**/*.ts", {}, "build");
 //});

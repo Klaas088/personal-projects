@@ -2,7 +2,7 @@
 <html>
 <head>
     <title></title>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <script src="https://code.jquery.com/jquery-1.12.3.js" integrity="sha256-1XMpEtA4eKXNNpXcJ1pmMPs8JV+nwLdEqwiJeCQEkyc=" crossorigin="anonymous"></script>
 
 </head>
@@ -18,6 +18,26 @@
         <a href="https://api.jquery.com/jquery.deferred/">https://api.jquery.com/jquery.deferred/</a>
     </p>
     <script>
+        //De klassieke manier
+        var prom = new Promise(function (resolve, reject) {
+            window.setTimeout(
+                function () {
+                    resolve("Klaar")
+                }, 2000);
+        });
+        prom.then(function (message) { console.log("Promise::" + message); })
+
+        //Jqeury
+
+        var promJquery = function () {
+            var deferred = new $.Deferred();
+            window.setTimeout(function () {
+                deferred.resolve("Resolved !");
+            }, 2100);
+            return deferred.promise();
+        }
+
+        promJquery().then(function (message) { console.log("JQ::" + message); })
 
     </script>
 </body>
