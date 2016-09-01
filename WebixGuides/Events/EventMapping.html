@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.webix.com/edge/webix.css" type="text/css">
+    <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <script src="../testdata.js"></script>
+</head>
+<body>
+    <script>
+        // met event mapping kan je een event van een component koppelen aan een ander component.
+        // daardoor moet je de functie maar 1 maal aanmaken
+        webix.ui({
+            rows: [
+                 {
+                     view: "list",
+                     id: "list1",
+                     data: small_wrong_film_set,
+                     on: {
+                         onItemClick: getItemValue
+                     }
+                 },
+                {
+                    view: "list",
+                    id: "list2",
+                    data: small_wrong_film_set
+                }
+            ]
+
+        })
+        // hier zie je dat de mapevent ervoor zorgt dat de onitemclick hetzelfde is als die van list1
+        $$("list2").mapEvent({ onitemclick: $$("list1") });
+
+        function getItemValue(id) {
+            // om te weten vanwaar de functie wordt opgeroepen kan je gebruik maken van de '$eventSource'
+            // dit terwijl 'this' het object terug geeft vanwaar de handler de eerste maal is geattached
+            var obj = this.$eventSource || this;
+            var value = obj.getItem(id).value;
+            webix.message("List: " + obj.config.id + ", clicked: " + id);
+
+        }
+    </script>
+
+</body>
+</html>
