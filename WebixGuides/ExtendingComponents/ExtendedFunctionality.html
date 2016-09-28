@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.webix.com/edge/webix.css" type="text/css">
+    <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <script src="../testdata.js"></script>
+</head>
+<body>
+    <script>
+        // Late Binding
+        // Late binding is om een bestaande componenten te gaan uitbreiden,
+        // nadat je het object hebt geinitialiseerd
+        webix.ui({
+            view: "toolbar",
+            id: "my_toolbar"
+        });
+
+        // .extend(Target,Source,[overwrite: boolean(default false)]);
+        // Bij extend wordt de source in de target gekopieerd, wordt als het ware 'aangevuld'
+
+        webix.extend($$("my_toolbar"), webix.Movable);
+        // Hier worden de 'native' (eigen) methodes niet overschrijven door 'inherited' (overervende)
+        // als die dezelfde naam hebben
+
+        // Early binding
+        // Hier worden de prototypes van 2 objecten gemerged in het begin.
+        // Daardoor zijn kan je methodes gebruiken met dezelfde naam, zonder dat deze worden overschrijven.
+        // .proto() is hetzelfde als .extend() maar bij proto kan je meerdere source objecten meegeven
+
+        mytoolbar = webix.proto({webix.Movable},webix.ui.toolbar);
+        var obj = new mytoolbar({ view:"toolbar",... });
+        // outputs a movable toolbar
+
+        // protoUI();
+        // Om bestaande componenten te gaan uitbreiden met extra functionaliteit.
+        // Is hetzelfde als .proto maar maakt hier meteen een nieuwe view
+        webix.protoUI({
+            name:"mylist"
+        }, webix.EditAbility, webix.ui.list);
+
+        webix.ui({
+            view:"mylist"
+           });
+
+    </script>
+</body>
+</html>

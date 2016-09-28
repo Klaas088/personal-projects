@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.webix.com/edge/webix.css" type="text/css">
+    <script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <script src="../testdata.js"></script>
+</head>
+<body>
+    <script>
+        webix.protoUI({
+            name: "custom",
+            defaults: { controlHeight: 50 },
+            $init: function (config) {
+                this.$view.className = "my_control";
+                this.$view.innerHTML = "<div class='item1'></div><div class='item2'></div><div class='item3'></div>";
+            },
+            item1_setter: function (value) {
+                if (value)
+                    this.$view.childNodes[0].innerHTML = value;
+                return value;
+            }
+            ,
+            item2_setter: function (value) {
+                if (value)
+                    this.$view.childNodes[1].innerHTML = value;
+                return value;
+            }
+             ,
+            item3_setter: function (value) {
+                if (value)
+                    this.$view.childNodes[2].innerHTML = value;
+                return value;
+            },
+            on: { 'onClick': function () { Console.log("click"); } }
+        },
+   webix.MouseEvents, webix.EventSystem, webix.ui.view);
+
+        webix.ui({
+            view: "custom",
+            item1: "Reg Form",
+            item2: "Filmset",
+            item3: "Details"
+        })
+
+    </script>
+</body>
+</html>
