@@ -1,0 +1,1 @@
+C:\Users\KR\Documents\Personal-projects\DesignPatterns\ObserverPattern\bin\Debug\ObserverPattern.exe.config
