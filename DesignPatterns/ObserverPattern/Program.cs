@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ObserverPattern.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,20 @@ namespace ObserverPattern
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Start: Observer pattern");
+
+            var subject = new Subject();
+
+            var hexObserver = new HexObserver(subject);
+            var binaryObserver = new BinaryObserver(subject);
+
+            subject.Name = "Klaas";
+            subject.notifyAllObservers();
+            subject.Name = "Marieke";
+            subject.notifyAllObservers();
+
+            Console.WriteLine("Stop: Observer pattern");
+            Console.ReadLine();
         }
     }
 }

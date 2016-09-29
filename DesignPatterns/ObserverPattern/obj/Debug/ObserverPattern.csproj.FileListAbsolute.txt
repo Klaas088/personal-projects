@@ -1,1 +1,6 @@
 C:\Users\KR\Documents\Personal-projects\DesignPatterns\ObserverPattern\bin\Debug\ObserverPattern.exe.config
+C:\Users\KR\Documents\Personal-projects\DesignPatterns\ObserverPattern\obj\Debug\ObserverPattern.csprojResolveAssemblyReference.cache
+C:\Users\KR\Documents\Personal-projects\DesignPatterns\ObserverPattern\bin\Debug\ObserverPattern.exe
+C:\Users\KR\Documents\Personal-projects\DesignPatterns\ObserverPattern\bin\Debug\ObserverPattern.pdb
+C:\Users\KR\Documents\Personal-projects\DesignPatterns\ObserverPattern\obj\Debug\ObserverPattern.exe
+C:\Users\KR\Documents\Personal-projects\DesignPatterns\ObserverPattern\obj\Debug\ObserverPattern.pdb

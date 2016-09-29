@@ -1,0 +1,17 @@
+﻿Obeserver pattern
+-----------------
+
+Het observer pattern wordt gebruikt als een subject-object moet aangeven aan andere subscriber-objecten dat er een bepaalde status is veranderd aan 
+het subject object.
+Zonder dat het subject object weet aan wie hij dit moet laten weten, de objecten zijn onafhankelijk van elkaar.
+
+Implementatie:
+Een observer pattern bestaat minstens uit 3 zaken
+- Een subject
+- Een observer
+- Een cleint
+
+
+Links:
+https://en.wikipedia.org/wiki/Observer_pattern
+https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
